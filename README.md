@@ -22,57 +22,54 @@ The GraphQL schema defines the following types and operations:
 - **OrderLine**: Represents an item in an order, linking a `product` and specifying a `quantity`.
 
 ```mermaid
-[Customer]
-| id: long (PK)
-| firstName: String
-| lastName: String
-| email: String
-| phoneNumber: String
-| address: String
-| city: String
-| state: String
-| zipCode: String
-      |
-      |o-- (CUSTOMER_ID, FK, non-nullable, non-updatable)
-      |
-[Order]
-| id: String (PK)
-| customer: Customer
-| salesperson: Salesperson
-| orderLines: List<OrderLine>
-      |
-      |o-- (SALESPERSON_ID, FK, non-nullable, non-updatable)
-      |
-[Salesperson]
-| id: long (PK)
-| firstName: String
-| lastName: String
-| email: String
-| phoneNumber: String
-| address: String
-| city: String
-| state: String
-| zipCode: String
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    SALESPERSON ||--o{ ORDER : handles
+    ORDER ||--o{ ORDER_LINE : contains
+    ORDER_LINE ||--|| PRODUCT : references
 
-[Order] 
-      |
-      |o-- (ORDER_ID, FK, non-nullable, non-updatable)
-      |
-[OrderLine]
-| id: long (PK)
-| order: Order
-| product: Product
-| quantity: int
-      |
-      |--o| (PRODUCT_ID, FK, non-nullable, non-updatable)
-      |
-[Product]
-| id: String (PK)
-| name: String
-| size: int
-| variety: String
-| price: BigDecimal
-| status: String
+    CUSTOMER {
+        long id PK
+        string firstName
+        string lastName
+        string email
+        string phoneNumber
+        string address
+        string city
+        string state
+        string zipCode
+    }
+    SALESPERSON {
+        long id PK
+        string firstName
+        string lastName
+        string email
+        string phoneNumber
+        string address
+        string city
+        string state
+        string zipCode
+    }
+    PRODUCT {
+        string id PK
+        string name
+        int size
+        string variety
+        bigdecimal price
+        string status
+    }
+    ORDER {
+        string id PK
+        Customer customer FK
+        Salesperson salesperson FK
+        ListOrderLine orderLines
+    }
+    ORDER_LINE {
+        long id PK
+        Order order FK
+        Product product FK
+        int quantity
+    }
 ```
 ### Inputs
 - **CustomerInput**: Used for creating or updating customer data in mutations.
