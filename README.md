@@ -21,6 +21,59 @@ The GraphQL schema defines the following types and operations:
 - **Order**: Represents an order, linking a `customer`, `salesperson`, and a list of `orderLines`.
 - **OrderLine**: Represents an item in an order, linking a `product` and specifying a `quantity`.
 
+```mermaid
+[Customer]
+| id: long (PK)
+| firstName: String
+| lastName: String
+| email: String
+| phoneNumber: String
+| address: String
+| city: String
+| state: String
+| zipCode: String
+      |
+      |o-- (CUSTOMER_ID, FK, non-nullable, non-updatable)
+      |
+[Order]
+| id: String (PK)
+| customer: Customer
+| salesperson: Salesperson
+| orderLines: List<OrderLine>
+      |
+      |o-- (SALESPERSON_ID, FK, non-nullable, non-updatable)
+      |
+[Salesperson]
+| id: long (PK)
+| firstName: String
+| lastName: String
+| email: String
+| phoneNumber: String
+| address: String
+| city: String
+| state: String
+| zipCode: String
+
+[Order] 
+      |
+      |o-- (ORDER_ID, FK, non-nullable, non-updatable)
+      |
+[OrderLine]
+| id: long (PK)
+| order: Order
+| product: Product
+| quantity: int
+      |
+      |--o| (PRODUCT_ID, FK, non-nullable, non-updatable)
+      |
+[Product]
+| id: String (PK)
+| name: String
+| size: int
+| variety: String
+| price: BigDecimal
+| status: String
+```
 ### Inputs
 - **CustomerInput**: Used for creating or updating customer data in mutations.
 
