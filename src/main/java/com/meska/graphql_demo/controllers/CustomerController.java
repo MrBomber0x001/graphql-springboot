@@ -1,8 +1,8 @@
-package com.meska.graphql_demo;
+package com.meska.graphql_demo.controllers;
 
-import com.meska.graphql_demo.data.Customer;
-import com.meska.graphql_demo.data.CustomerInput;
-import com.meska.graphql_demo.data.CustomerRepository;
+import com.meska.graphql_demo.entities.customer.Customer;
+import com.meska.graphql_demo.entities.customer.CustomerInput;
+import com.meska.graphql_demo.repo.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

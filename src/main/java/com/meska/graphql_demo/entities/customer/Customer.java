@@ -1,4 +1,4 @@
-package com.meska.graphql_demo.data;
+package com.meska.graphql_demo.entities.customer;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

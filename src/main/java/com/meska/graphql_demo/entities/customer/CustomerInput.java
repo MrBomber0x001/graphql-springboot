@@ -1,4 +1,4 @@
-package com.meska.graphql_demo.data;
+package com.meska.graphql_demo.entities.customer;
 
 public class CustomerInput {
     private String firstName;
